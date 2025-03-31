@@ -2,6 +2,12 @@
 <html>
 <head>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             overflow: hidden;
@@ -19,13 +25,13 @@
         }
 
         #message {
-            font-size: 24px;
+            font-size: 28px;
             margin-bottom: 20px;
         }
 
         #lightButton {
-            padding: 12px 24px;
-            font-size: 20px;
+            padding: 14px 28px;
+            font-size: 22px;
             background-color: yellow;
             color: black;
             border: none;
@@ -41,6 +47,7 @@
             height: 100vh;
             background: url('party.jpg') no-repeat center center;
             background-size: cover;
+            position: fixed;
         }
 
         #funny-content {
@@ -53,23 +60,23 @@
         }
 
         .cat-gif {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             position: absolute;
             top: 50%;
             animation: spin 3s linear infinite;
         }
 
         #cat-left {
-            left: 5%;
+            left: 10%;
         }
 
         #cat-right {
-            right: 5%;
+            right: 10%;
         }
 
         #birthdayText {
-            font-size: 28px;
+            font-size: 32px;
             margin-top: 20px;
             font-weight: bold;
         }
@@ -78,7 +85,7 @@
             display: none;
             width: 100vw;
             height: 100vh;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
         }
@@ -87,6 +94,9 @@
             display: none;
             width: 100vw;
             height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
             background: url('final-bday.jpg') no-repeat center center;
             background-size: cover;
         }
@@ -99,33 +109,12 @@
         /* 📱 Portrait Mode Optimization */
         @media (max-width: 600px) {
             #message {
-                font-size: 18px;
-            }
-
-            #lightButton {
-                font-size: 16px;
-                padding: 10px 20px;
-            }
-
-            .cat-gif {
-                width: 80px;
-                height: 80px;
-            }
-
-            #birthdayText {
                 font-size: 22px;
             }
-        }
 
-        /* Portrait mode landscape tweaks for bigger screens */
-        @media (min-width: 601px) and (max-width: 1024px) {
             #lightButton {
                 font-size: 18px;
                 padding: 12px 24px;
-            }
-
-            #message {
-                font-size: 22px;
             }
 
             .cat-gif {
@@ -135,6 +124,10 @@
 
             #birthdayText {
                 font-size: 26px;
+            }
+
+            #final-bday {
+                background-size: cover;
             }
         }
     </style>
@@ -202,7 +195,7 @@
 
                 setTimeout(() => {
                     document.getElementById('explosion').style.display = 'block';
-                    document.getElementById('explosionSound').play();
+                    playGetOutSound(); // Make sure 'GET OUT' sound plays
                 }, 8000);
 
                 setTimeout(() => {
@@ -210,6 +203,14 @@
                     document.getElementById('final-bday').style.display = 'block';
                 }, 10000);
             }
+        }
+
+        function playGetOutSound() {
+            const explosionSound = document.getElementById('explosionSound');
+            explosionSound.currentTime = 0;
+            explosionSound.play().catch(error => {
+                console.log('Error playing sound:', error);
+            });
         }
     </script>
 
